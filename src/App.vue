@@ -1,10 +1,8 @@
-import styled, {createGlobalStyle} from 'styled-components'
 <template>
   <div id='app'>
-  <GlobalStyle />
-    <Div>
+    <main>
       <input type="text" placeHolder="...Procurando o país"/>
-    </Div>
+    </main>
   </div>
 </template>
 
@@ -20,14 +18,3 @@ export default {
 }
 </script>
 
-const GlobalStyle = createGlobalStyle`
-  margin: 50px;
-  box-sizing: 0;
-  padding: 0;
-`
-const Body = styled.body`
-  font-family: 'Courier New', Courier, monospace;
-`
-const Div = styled.div`
- background-color: black;
-`
