@@ -19,22 +19,15 @@
           </div>
 
           <div class="weather-box">
-            <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>
-            <div class="weather">{{ weather.weather[0].main }}</div>
-          </div>
-        </div>
-      </section>
-      <section class="forecast">
-        <div class="forecast-wrap" v-if="typeof weatherDays.main != 'undefined'">
-          <div class="forecast-day" v-bind:for="day in forecastDays">
-            <div>
-              {{forecastDays[day].weather[0].main}}
+            <div class="temp">
+              {{ Math.round(weather.main.temp) }}°c
+              </div>
+            <div class="weather">{{ weather.weather[0].main }}
+
             </div>
           </div>
-
         </div>
       </section>
-
     </main>
   </div>
 </template>
@@ -93,10 +86,12 @@ export default {
       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly,alerts&units=metric&appid=${this.api_key}`)
       .then(res => res.json())
       .then(this.setAllResults)
+      .catch(error => {
+        return error
+      })
     },
     setAllResults (results) {
       this.weatherDays = results
-      this.forecastDays = this.weatherDays.daily
     },
     countDays() {
       this.day += 1
