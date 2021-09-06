@@ -22,10 +22,19 @@
             <div class="temp">
               {{ Math.round(weather.main.temp) }}°c
               </div>
-            <div class="weather">{{ weather.weather[0].main }}
-
+            <div class="weather">
+              {{ weather.weather[0].main }}
             </div>
           </div>
+        </div>
+      </section>
+      <section class="all-days">
+        <div v-if="view">
+          <ul class="day">
+            <li>{{countDays()}}</li>
+            <li>{{weatherDays[1].temp.day}}°c</li>
+            <li>{{weatherDays[1].weather[0].main}}</li>
+          </ul>
         </div>
       </section>
     </main>
@@ -43,14 +52,15 @@ export default {
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {},
-      longitude: '',
-      latitude: '',
-      weatherDays: {},
       day: '',
       date: '',
       month: '',
       year: '',
+      longitude: '',
+      latitude: '',
+      weatherDays: {},
       forecastDays: [],
+      view: false,
     }
   },
   methods: {
@@ -62,9 +72,9 @@ export default {
           }).then(this.setResults);
       }
     },
-    async setResults (results) {
-      let longitude= await results.coord.lon
-      let latitude= await results.coord.lat
+    setResults (results) {
+      let longitude= results.coord.lon
+      let latitude= results.coord.lat
       this.weather = results;
 
       this.fetchSecondApi(latitude, longitude);
@@ -91,10 +101,12 @@ export default {
       })
     },
     setAllResults (results) {
-      this.weatherDays = results
+      this.weatherDays = results.daily
+      this.view = true
     },
     countDays() {
-      this.day += 1
+      this.date += 1
+      return `${this.date} ${this.month} ${this.year}`;
     }
   }
 }
