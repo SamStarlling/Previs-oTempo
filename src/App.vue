@@ -261,7 +261,7 @@ main {
 }
 
 ul {
-  width: 30%;
+  width: 20%;
   margin: auto;
   padding-bottom: 2rem;
 }
