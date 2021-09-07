@@ -22,11 +22,48 @@
             <div class="temp">
               {{ Math.round(weather.main.temp) }}°c
               </div>
-            <div class="weather">{{ weather.weather[0].main }}
-
+            <div class="weather">
+              {{ weather.weather[0].main }}
             </div>
           </div>
         </div>
+      </section>
+      <section v-if="view" class="all-days  weather-box">
+          <ul class="day">
+            <li class="day2">{{countDays()}}</li>
+            <li class="temp2">{{Math.round(weatherDays[1].temp.day)}}°c</li>
+            <li>{{weatherDays[1].weather[0].main}}</li>
+          </ul>
+          <ul class="day">
+            <li class="day2">{{countDays()}}</li>
+            <li class="temp2">{{Math.round(weatherDays[2].temp.day)}}°c</li>
+            <li>{{weatherDays[2].weather[0].main}}</li>
+          </ul>
+          <ul class="day">
+            <li class="day2">{{countDays()}}</li>
+            <li class="temp2">{{Math.round(weatherDays[3].temp.day)}}°c</li>
+            <li>{{weatherDays[3].weather[0].main}}</li>
+          </ul>
+          <ul class="day">
+            <li class="day2">{{countDays()}}</li>
+            <li class="temp2">{{Math.round(weatherDays[4].temp.day)}}°c</li>
+            <li>{{weatherDays[4].weather[0].main}}</li>
+          </ul>
+          <ul class="day">
+            <li class="day2">{{countDays()}}</li>
+            <li class="temp2">{{Math.round(weatherDays[5].temp.day)}}°c</li>
+            <li>{{weatherDays[5].weather[0].main}}</li>
+          </ul>
+          <ul class="day">
+            <li class="day2">{{countDays()}}</li>
+            <li class="temp2">{{Math.round(weatherDays[6].temp.day)}}°c</li>
+            <li>{{weatherDays[6].weather[0].main}}</li>
+          </ul>
+          <ul class="day">
+            <li class="day2">{{countDays()}}</li>
+            <li class="temp2">{{Math.round(weatherDays[7].temp.day)}}°c</li>
+            <li>{{weatherDays[7].weather[0].main}}</li>
+          </ul>
       </section>
     </main>
   </div>
@@ -43,14 +80,15 @@ export default {
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {},
-      longitude: '',
-      latitude: '',
-      weatherDays: {},
       day: '',
       date: '',
       month: '',
       year: '',
+      longitude: '',
+      latitude: '',
+      weatherDays: {},
       forecastDays: [],
+      view: false,
     }
   },
   methods: {
@@ -62,9 +100,9 @@ export default {
           }).then(this.setResults);
       }
     },
-    async setResults (results) {
-      let longitude= await results.coord.lon
-      let latitude= await results.coord.lat
+    setResults (results) {
+      let longitude= results.coord.lon
+      let latitude= results.coord.lat
       this.weather = results;
 
       this.fetchSecondApi(latitude, longitude);
@@ -91,10 +129,12 @@ export default {
       })
     },
     setAllResults (results) {
-      this.weatherDays = results
+      this.weatherDays = results.daily
+      this.view = true
     },
     countDays() {
-      this.day += 1
+      this.date += 1
+      return `${this.date} ${this.month} ${this.year}`;
     }
   }
 }
@@ -130,7 +170,7 @@ main {
 }
 
 .today {
-  height: 50%;
+  height: 30%;
 }
 
 .search-box {
@@ -142,7 +182,7 @@ main {
   display: block;
   width: 50%;
   height: 3rem;
-  padding: 0 20%;
+  text-align: center;
   margin: auto;
   
   color: #313131;
@@ -206,5 +246,50 @@ main {
   font-weight: 700;
   font-style: italic;
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.all-days {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 2rem;
+  height: 50%;
+  color: #FFF;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+ul {
+  width: 30%;
+  margin: auto;
+  padding-bottom: 2rem;
+}
+
+li {
+  list-style: none;
+}
+
+.temp2 {
+  display: inline-block;
+  padding: 1rem;
+  color: rgb(255, 255, 255);
+  font-size: 3rem;
+  font-weight: 900;
+
+  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+  background-color:rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  margin: 30px 0px;
+
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.day2 {
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  text-align: center;
 }
 </style>
