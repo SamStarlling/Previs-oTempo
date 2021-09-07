@@ -1,24 +1,21 @@
-# vue-weather
+# Previsão do tempo
 
-## Project setup
+## Comandos para rodar o projeto localmente
+### Instalar as dependências do projeto
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+npm install
 ```
 
-### Compiles and minifies for production
+### Rodar o projeto localmente
 ```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
+npm run serve
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Para publicar o projeto
+```
+npm run build
+```
+
+## Utilizar o site
+
+
