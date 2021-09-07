@@ -16,6 +16,3 @@ npm run serve
 npm run build
 ```
 
-## Utilizar o site
-
-
